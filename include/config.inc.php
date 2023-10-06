@@ -1,0 +1,8 @@
+<?php
+/efine('DBHOST', 'localhost');
+define('DBNAME', 'art');
+define('DBUSER', 'root');
+define('DBPASS', '');
+define('DBCONNSTRING',"mysql:host=" . DBHOST . ";dbname=" . DBNAME . ";charset=utf8mb4;");
+//define('DBCONNSTRING','sqlite:./databases/art.db');
+?>
