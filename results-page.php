@@ -32,20 +32,12 @@
             $stmt->bindvalue(3, '%' . $genre . '%');
             $stmt->bindvalue(4, '%' . $year . '%');
             $stmt->execute();
-
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $pdo = null;
-
-            echo "<form action = 'single-song-page.php' method = 'GET'>";
+            $pdo = null;    
             foreach($data as $row){
-                echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";
-                      
-            }
-            echo "<input type = 'hidden' id = 'hiddenInput' name = 'hiddenInput' value = " . $title . ">"; 
-            echo "<input type = 'submit' value = 'View'>";
-            echo "</form>";
+                echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";       
+            }  
         }
-
     }
     catch (PDOException $e) {
         die( $e->getMessage());
@@ -54,5 +46,9 @@
 <!DOCTYPE html>
 <html>
 <body>
+    <form action = "single-song-page.php" method = "GET">
+        <input type = "hidden" id = "hiddenInput" name = "hiddenInput" value = <?php echo $title ?>>
+        <input type = "submit" value = "View">
+    </form>
 </body>
 </html>
