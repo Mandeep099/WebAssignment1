@@ -10,10 +10,11 @@
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
-
+        /*
         foreach($data as $row){
             echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " other info: " . $row['bpm'] . "</br>";
-        }
+        }*/
+         echo $_GET['hiddenInput'];
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
