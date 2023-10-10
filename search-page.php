@@ -3,7 +3,7 @@
 <body>
     <h1>Basic Song Search</h1>
 
-    <form action = "results-page.php" metod = "get">
+    <form action = "results-page.php" metod = "GET">
         <label for = "songTitle">Title</label>
         <input type = "text" id = "songTitle" name = "songTitle">
         </br>

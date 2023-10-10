@@ -1,8 +1,6 @@
-
 <?php require_once('config.inc.php'); ?>
 <?php
-//tables: songs, artists, genres and types
-//title, genre_name, artist_name
+//currently displays all songs in the databasse
     try {
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
