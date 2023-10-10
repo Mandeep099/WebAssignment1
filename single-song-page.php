@@ -1,4 +1,4 @@
-<?php require_once('config.inc.php'); ?>
+<?php require_once('include/config.inc.php'); ?>
 <?php
 //currently displays all songs in the databasse
 try {
@@ -10,10 +10,13 @@ try {
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
+
+        $titleInput = $_GET['hiddenInput'];
         foreach($data as $row){
-            echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " other info: " . $row['bpm'] . "</br>";
+            if(urldecode($titleInput) == $row['title']){
+                echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " other info: " . $row['bpm'] . "</br>";
+            }
         }
-        echo $_GET['hiddenInput'];
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
