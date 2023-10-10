@@ -1,4 +1,4 @@
-<?php require_once('config.inc.php'); ?>
+<?php require_once('include/config.inc.php'); ?>
 <?php
     $title = $_GET['songTitle'];
     $name = $_GET['artistName'];
@@ -16,7 +16,7 @@
 
         if(!isset($_GET['submit']) && $title == "" && $name == "" && $genre == "" && $year == ""){
             foreach($data as $row){
-                echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " other info: " . $row['bpm'] . "</br>";
+                echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " year: " . $row['year'] . "</br>";
             }
         }
         else{
@@ -33,10 +33,11 @@
             $stmt->bindvalue(4, '%' . $year . '%');
             $stmt->execute();
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $pdo = null;    
+            $pdo = null;
+             
             foreach($data as $row){
-                echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";       
-            }  
+                echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";   
+            }
         }
     }
     catch (PDOException $e) {
@@ -47,8 +48,17 @@
 <html>
 <body>
     <form action = "single-song-page.php" method = "GET">
-        <input type = "hidden" id = "hiddenInput" name = "hiddenInput" value = <?php echo $title ?>>
+        <!--https://stackoverflow.com/questions/2418771/remove-encoding-using-php-->
+        <input type = "hidden" id = "hiddenInput" name = "hiddenInput" value = <?php echo urlencode($row['title']) ?>>
         <input type = "submit" value = "View">
+    </form>
+    
+    <form action = "favorites-page.php" method = "GET">
+        <input type = "hidden" id = "hiddenTitle" name = "hiddenTitle" value = <?php echo urlencode($row['title'])?>>
+        <input type = "hidden" id = "hiddenName" name = "hiddenName" value = <?php echo urlencode($row['artist_name']) ?>>
+        <input type = "hidden" id = "hiddenGenre" name = "hiddenGenre" value = <?php echo urlencode($row['genre_name']) ?>>
+        <input type = "hidden" id = "hiddenYear" name = "hiddenYear" value = <?php echo urlencode($row['year']) ?>>
+        <input type = "submit" value = "Add To Favorite">
     </form>
 </body>
 </html>
