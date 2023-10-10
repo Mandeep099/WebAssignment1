@@ -1,6 +1,5 @@
 <?php require_once('config.inc.php'); ?>
 <?php
-//adding a comment
     $title = $_GET['songTitle'];
     $name = $_GET['artistName'];
     $genre = $_GET['genreName'];
@@ -37,14 +36,19 @@
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $pdo = null;
 
+            echo "<form action = 'single-song-page.php' method = 'GET'>";
             foreach($data as $row){
                 echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";
+                      
             }
+            echo "<input type = 'hidden' id = 'hiddenInput' name = 'hiddenInput' value = " . $title . ">"; 
+            echo "<input type = 'submit' value = 'View'>";
+            echo "</form>";
         }
 
     }
     catch (PDOException $e) {
-        die( $e->getMessage() );
+        die( $e->getMessage());
     }
 ?>
 <!DOCTYPE html>
