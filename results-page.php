@@ -1,5 +1,6 @@
 <?php require_once('config.inc.php'); ?>
 <?php
+//adding a comment
     $title = $_GET['songTitle'];
     $name = $_GET['artistName'];
     $genre = $_GET['genreName'];
