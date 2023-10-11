@@ -1,13 +1,19 @@
 <?php
-    $title = $_GET['hiddenTitle'];
-    $name = $_GET['hiddenName'];
-    $genre = $_GET['hiddenGenre'];
-    $year = $_GET['hiddenYear'];
-
-    echo "Title: " . urldecode($title) . " Name: " . urldecode($name) . " Genre: " . urldecode($genre) . " Year: " . urldecode($year);
+    session_start();
 ?>
 <!DOCTYPE html>
 <html>
 <body>
+    <?php
+        function removeAll(){
+            unset($_SESSION['Favorites']);
+        }
+        echo "<form>";
+        foreach($_SESSION["Favorites"] as $i => $r){
+            //echo $i . "</br>";
+            echo $r . "</br>"; 
+        }
+        echo "</form>";
+    ?>
 </body>
 </html>
