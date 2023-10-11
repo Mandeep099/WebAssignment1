@@ -1,9 +1,6 @@
 <?php require_once('include/config.inc.php'); ?>
 <?php
-    $title = $_GET['songTitle'];
-    $name = $_GET['artistName'];
-    $genre = $_GET['genreName'];
-    $year = $_GET['year'];
+    session_start();
     try {
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -14,9 +11,9 @@
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
-        if(!isset($_GET['submit']) && $title == "" && $name == "" && $genre == "" && $year == ""){
+        if(!isset($_GET['submit']) && $_GET['songTitle'] == "" && $_GET['artistName'] == "" && $_GET['genreName'] == "" && $_GET['year'] == ""){
             foreach($data as $row){
-                echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " year: " . $row['year'] . "</br>";
+                echo "Title: " . $row['title'] . " Artist Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " Year: " . $row['year'] . "</br>";
             }
         }
         else{
@@ -27,17 +24,37 @@
                 WHERE title LIKE ? AND  artist_name LIKE ? AND genre_name LIKE ? AND year LIKE ?
             ";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindvalue(1, '%' . $title . '%');
-            $stmt->bindvalue(2, '%' . $name . '%');
-            $stmt->bindvalue(3, '%' . $genre . '%');
-            $stmt->bindvalue(4, '%' . $year . '%');
+            $stmt->bindvalue(1, '%' . $_GET['songTitle'] . '%');
+            $stmt->bindvalue(2, '%' . $_GET['artistName'] . '%');
+            $stmt->bindvalue(3, '%' . $_GET['genreName'] . '%');
+            $stmt->bindvalue(4, '%' . $_GET['year'] . '%');
             $stmt->execute();
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $pdo = null;
              
             foreach($data as $row){
-                echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";   
+                echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";  
+
             }
+
+            // https://www.youtube.com/watch?v=m_lQBoCefXw
+            // used the above video to help implement this
+            // might try to find a different way to implement later
+            if(!isset($_SESSION['Favorites'])){
+                $_SESSION['Favorites'] = array();
+            }
+            array_push($_SESSION['Favorites'], "Title: " . $row['title'] . " Artist Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " Year: " . $row['year']);
+  
+
+            // if(!isset($_SESSION['Favorites'])){
+            //     $favorites = [
+            //         "Title" => [$row['title']],
+            //         "Artist Name" => [$row['artist_name']],
+            //         "Genre" => [$row['genre_name']],
+            //         "Year" => [$row['year']]
+            //     ];
+            //     $_SESSION['Favorites'][] = $favorites;
+            // } 
         }
     }
     catch (PDOException $e) {
@@ -52,13 +69,6 @@
         <input type = "hidden" id = "hiddenInput" name = "hiddenInput" value = <?php echo urlencode($row['title']) ?>>
         <input type = "submit" value = "View">
     </form>
-    
-    <form action = "favorites-page.php" method = "GET">
-        <input type = "hidden" id = "hiddenTitle" name = "hiddenTitle" value = <?php echo urlencode($row['title'])?>>
-        <input type = "hidden" id = "hiddenName" name = "hiddenName" value = <?php echo urlencode($row['artist_name']) ?>>
-        <input type = "hidden" id = "hiddenGenre" name = "hiddenGenre" value = <?php echo urlencode($row['genre_name']) ?>>
-        <input type = "hidden" id = "hiddenYear" name = "hiddenYear" value = <?php echo urlencode($row['year']) ?>>
-        <input type = "submit" value = "Add To Favorite">
-    </form>
+    <a href="favorites-page.php">Add to Favorites</a>
 </body>
 </html>
