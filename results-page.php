@@ -1,5 +1,6 @@
 <?php require_once('include/config.inc.php'); ?>
 <?php
+//https://www.youtube.com/watch?v=m_lQBoCefXw         
     session_start();
     try {
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
@@ -36,29 +37,19 @@
                 echo $row['title'] . " " . $row['artist_name'] . " " . $row['genre_name'] . " " . $row['year'] . "</br>";  
 
             }
-
-            // https://www.youtube.com/watch?v=m_lQBoCefXw
-            // used the above video to help implement this
-            // might try to find a different way to implement later
-            if(!isset($_SESSION['Favorites'])){
-                $_SESSION['Favorites'] = array();
-            }
-            array_push($_SESSION['Favorites'], "Title: " . $row['title'] . " Artist Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " Year: " . $row['year']);
-  
-
-            // if(!isset($_SESSION['Favorites'])){
-            //     $favorites = [
-            //         "Title" => [$row['title']],
-            //         "Artist Name" => [$row['artist_name']],
-            //         "Genre" => [$row['genre_name']],
-            //         "Year" => [$row['year']]
-            //     ];
-            //     $_SESSION['Favorites'][] = $favorites;
-            // } 
         }
     }
     catch (PDOException $e) {
         die( $e->getMessage());
+    }
+    function addToFav($title, $name, $genre, $year){
+            //https://stackoverflow.com/questions/60728259/how-to-push-multiple-values-to-a-session-array
+            //used the above to implement the code below
+            //might be the final code
+        if(!isset($_SESSION['test']) && !is_array($_SESSION['test'])){
+            $_SESSION['test'] = array();
+        }
+        array_push($_SESSION['test'], "Title: " . $title . " Artist Name: " . $name . " Genre: " . $genre . " Year: " . $year);
     }
 ?>
 <!DOCTYPE html>
@@ -68,6 +59,15 @@
         <!--https://stackoverflow.com/questions/2418771/remove-encoding-using-php-->
         <input type = "hidden" id = "hiddenInput" name = "hiddenInput" value = <?php echo urlencode($row['title']) ?>>
         <input type = "submit" value = "View">
+    </form>
+    <form action = "favorites-page.php" method = "GET">
+        <input type = "button"  id = "fav" name = "fav" value = "Add To Favorites"
+            <?php
+                if(!isset($_GET['fav'])){
+                    addToFav($row['title'], $row['artist_name'], $row['genre_name'], $row['year']);
+                }
+            ?>
+        >
     </form>
     <a href="favorites-page.php">Add to Favorites</a>
 </body>
