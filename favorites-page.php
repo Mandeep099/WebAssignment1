@@ -8,12 +8,11 @@
         function removeAll(){
             unset($_SESSION['Favorites']);
         }
-        echo "<form>";
-        foreach($_SESSION["Favorites"] as $i => $r){
-            //echo $i . "</br>";
-            echo $r . "</br>"; 
+
+        foreach($_SESSION['test'] as $value){
+            echo "My value is: " . $value . "</br>";
         }
-        echo "</form>";
+
     ?>
 </body>
 </html>
