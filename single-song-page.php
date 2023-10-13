@@ -1,23 +1,5 @@
 <?php require_once('include/config.inc.php'); ?>
 <?php
-//currently displays all songs in the databasse
-// SELECT *
-// FROM artists LEFT OUTER JOIN types
-// WHERE artist_type_id == type_id;   
-// JOIN songs USING(artist_id)
-// JOIN genres USING(genre_id)
-
-//everything works but the title
-// SELECT *
-// FROM songs JOIN genres USING(genre_id)
-// JOIN artists JOIN types
-// WHERE artist_type_id = type_id 
-
-//working one
-// SELECT *
-// FROM songs JOIN genres USING(genre_id)
-// JOIN artists LEFT OUTER JOIN types
-// WHERE artist_type_id == type_id 
 try {
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
