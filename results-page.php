@@ -6,7 +6,8 @@
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "
-            SELECT * FROM songs JOIN genres USING(genre_id) JOIN artists USING(artist_id)
+            SELECT * 
+            FROM songs JOIN genres USING(genre_id) JOIN artists USING(artist_id)
         ";
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -22,7 +23,10 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "
                 SELECT * FROM songs JOIN genres USING(genre_id) JOIN artists USING(artist_id)
-                WHERE title LIKE ? AND  artist_name LIKE ? AND genre_name LIKE ? AND year LIKE ?
+                WHERE title LIKE ? 
+                AND  artist_name LIKE ? 
+                AND genre_name LIKE ? 
+                AND year LIKE ?
             ";
             $stmt = $pdo->prepare($sql);
             $stmt->bindvalue(1, '%' . $_GET['songTitle'] . '%');
@@ -46,10 +50,10 @@
             //https://stackoverflow.com/questions/60728259/how-to-push-multiple-values-to-a-session-array
             //used the above to implement the code below
             //might be the final code
-        if(!isset($_SESSION['test']) && !is_array($_SESSION['test'])){
-            $_SESSION['test'] = array();
+        if(!isset($_SESSION['Favorites']) && !is_array($_SESSION['Favorites'])){
+            $_SESSION['Favorites'] = array();
         }
-        array_push($_SESSION['test'], "Title: " . $title . " Artist Name: " . $name . " Genre: " . $genre . " Year: " . $year);
+        array_push($_SESSION['Favorites'], "Title: " . $title . " Artist Name: " . $name . " Genre: " . $genre . " Year: " . $year);
     }
 ?>
 <!DOCTYPE html>
@@ -61,7 +65,7 @@
         <input type = "submit" value = "View">
     </form>
     <form action = "favorites-page.php" method = "GET">
-        <input type = "button"  id = "fav" name = "fav" value = "Add To Favorites"
+        <input type = "submit"  id = "fav" name = "fav" value = "Add To Favorites"
             <?php
                 if(!isset($_GET['fav'])){
                     addToFav($row['title'], $row['artist_name'], $row['genre_name'], $row['year']);
@@ -69,6 +73,5 @@
             ?>
         >
     </form>
-    <a href="favorites-page.php">Add to Favorites</a>
 </body>
 </html>
