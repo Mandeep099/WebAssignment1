@@ -9,7 +9,7 @@
             unset($_SESSION['Favorites']);
         }
 
-        foreach($_SESSION['test'] as $value){
+        foreach($_SESSION['Favorites'] as $value){
             echo "My value is: " . $value . "</br>";
         }
 
