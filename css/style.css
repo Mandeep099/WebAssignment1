@@ -1,0 +1,53 @@
+/* https://stackoverflow.com/questions/74819880/i-want-to-horizontally-split-the-background-into-two-colors-where-one-is-black-c */
+/*used the above to help implement the background color of body*/
+body {
+    background-image: linear-gradient(to bottom, #009999, #00b3b3, #00cccc, #00e6e6);
+    background-repeat: no-repeat;
+    background-color: #00e6e6;
+}
+.searchForm{
+    display: block;
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+}
+
+legend{
+    margin: auto;
+    font-size: 30px;
+    color: white;
+}
+
+.serachFieldset{
+    border: 5px groove;
+    box-shadow: 10px 10px 8px grey;
+}
+
+input[type=text]{
+    width: 95%;
+    font-size: large;
+    display: flex;
+    margin: 8px;
+    padding: 8px;
+    border: 2px double;
+}
+
+input[type=submit]:hover{
+    background-color: #4db8ff;
+}
+input[type=submit]{
+    width: 100%;
+    font-size: large;
+    padding: 15px;
+    margin: auto;
+    border: none;
+    border-radius: 50px; 
+    text-align: center;
+    background-color: #1aa3ff;
+    color: white;
+}
+label{
+    font-size: 25px;
+    padding: 8px;
+}
+
