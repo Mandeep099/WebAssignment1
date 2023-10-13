@@ -82,8 +82,8 @@ function oneHitWonder(){
         $sql = "
             SELECT artist_id
             FROM songs JOIN artists USING(artist_id)
-            GROUP BY title
-            HAVING
+            GROUP BY artist_id
+            HAVING COUNT(artist_id) <= 1
         ";
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
