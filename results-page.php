@@ -19,7 +19,10 @@
 ?>
 <!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href = "css/style.css">
+    <title>Browse</title>
 </head>
 <html>
 <body>
@@ -47,9 +50,8 @@
             <p>Year</p>
         </div>
     </section>
-    
             <?php
-            //im ashamed of this
+            //very very inefficent
                 if($_GET['songTitle'] ==  "" && $_GET['artistName'] == "" && $_GET['genreName'] == "" && $_GET['year'] == ""){
                     ?><section class = "center"><div id = 'box2'><?php
                     foreach($data as $row){?>

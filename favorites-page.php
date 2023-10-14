@@ -5,7 +5,8 @@
             unset($_SESSION['Favorites']);
         } 
     }
-    //find the webiste used for this
+    //https://stackoverflow.com/questions/2231332/how-to-remove-a-variable-from-a-php-session-array
+    //used the above to implement the removeOne function
     function removeOne(){
         if(isset($_POST['removeOne'])){
             $key = array_search($_GET['title'],$_SESSION['Favorites']);
@@ -18,7 +19,10 @@
 ?>
 <!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href = "css/style.css">
+    <title>Favorites</title>
 </head>
 <html>
 <body>
