@@ -51,3 +51,68 @@ label{
     padding: 8px;
 }
 
+.container{
+    width: 50%;
+    margin: auto;
+    box-shadow: 1px 1px 1px 1px;
+    border-radius: 20px;
+}
+
+.rectangle{
+    width:100%;
+    height: 5%;
+    background-color: #009999;
+    text-align: center;
+    margin: auto;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: hidden;
+    border-radius: 50px;
+    color: lightpink;
+}
+
+.boxLeft{
+    width: 300px;
+    border: 5px solid;
+    padding: 15px;
+    float: left;
+    margin-top: 65px;
+    font-family: cursive;
+    text-align: left;
+    box-shadow: 5px 5px 5px 5px;
+}
+
+.boxRight{
+    width: 300px;
+    border: 5px solid;
+    padding: 15px;
+    margin: 10px;
+    float: right;
+    border: solid;
+    font-family: cursive;
+    text-align: left;
+    box-shadow: 5px 5px 5px 5px;
+}
+
+ul, li{
+    list-style: none;
+    padding: 0;
+}
+
+progress{
+    border: 1px;
+    border-radius: 30px;
+    float: right;
+}
+
+/*https://stackoverflow.com/questions/45507970/how-can-i-change-the-color-of-a-progress-bar-value-in-html*/
+/*used to implement a color change for the progress bar*/
+/*for firefox users*/
+progress::-moz-progress-bar{
+    background-color: red;
+}
+
+/*Should be for other browsers*/
+progress::-webkit-progress-bar{
+    background-color: #009999;
+}
