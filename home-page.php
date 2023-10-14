@@ -1,6 +1,5 @@
 <?php require_once('include/config.inc.php'); ?>
 <?php
-//currently displays all songs in the databasse
 function topGenre(){
     try {
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
@@ -16,9 +15,13 @@ function topGenre(){
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
+            echo "<li>";
             echo $row['genre_name'] . "</br>";
+            echo "</li>";
         }
+        echo "</ul>";
 
     }
     catch (PDOException $e) {
@@ -41,9 +44,13 @@ function topArtist(){
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
+            echo "<li>";
             echo $row['artist_name'] . "</br>";
+            echo "</li>";
         }
+        echo "</ul>";
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
@@ -66,9 +73,13 @@ function mostPopularSongs(){
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
-            echo $row['title'] . " " . $row['artist_name'] . "</br>";
+            echo "<li>";
+            echo $row['title'] . " <em>" . $row['artist_name'] . "</em></br>";
+            echo "</li>";
         }
+        echo "</ul>";
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
@@ -80,19 +91,23 @@ function oneHitWonder(){
         $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "
-            SELECT artist_id
+            SELECT  *
             FROM songs JOIN artists USING(artist_id)
             GROUP BY artist_id
             HAVING COUNT(artist_id) <= 1
+            LIMIT 10
         ";
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
-            //echo  $row['title'] . " " . $row['artist_name'] . "</br>";
-            echo $row['artist_id'] . "</br>";
+            echo "<li>";
+            echo  $row['title'] . " " . $row['artist_name'] . "</br>";
+            echo "</li>";
         }
+        echo "</ul>";
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
@@ -114,9 +129,13 @@ function longestAcoustic(){
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
+            echo "<li>";
             echo $row['title'] . "</br>";
+            echo "</li>";
         }
+        echo "</ul>";
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
@@ -138,9 +157,13 @@ function atTheClub(){
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
+            echo "<li>";
             echo $row['title'] . "</br>";
+            echo "</li>";
         }
+        echo "</ul>";
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
@@ -162,10 +185,13 @@ function runningSongs(){
         $result = $pdo->query($sql);
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
-
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
+            echo "<li>";
             echo $row['title'] . "</br>";
+            echo "</li>";
         }
+        echo "</ul>";
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
@@ -190,36 +216,49 @@ function studySongs(){
         $data = $result->fetchAll(PDO::FETCH_ASSOC);
         $pdo = null;
 
+        echo "<ul class = 'centerText'>";
         foreach($data as $row){
+            echo "<li>";
             echo $row['title'] . "</br>";
+            echo "</li>";
         }
+        echo "</ul>";
     }
     catch (PDOException $e) {
         die( $e->getMessage() );
     }
 }
-
-    echo "top genre </br>";
-    topGenre();
-    echo "Top arts</br>";
-    topArtist();
-    echo "Popualr songs</br>";
-    mostPopularSongs();
-    echo "One hits </br>";
-    oneHitWonder();
-    echo "accoustic </br>";
-    longestAcoustic();
-    echo "club </br>";
-    atTheClub();
-    echo " running</br>";
-    runningSongs();
-    echo "study</br>";
-    studySongs();
-
-
 ?>
 <!DOCTYPE html>
+<head>
+    <link rel = "stylesheet" href = "css/style.css">
+</head>
 <html>
 <body>
+    <header>
+        <h2>COMP 3512 Assign 1</h2>
+        <h3>Mandeep Bal</h3>
+        <nav>
+            <a href = "home-page.php">Home</a>
+            <a href = "search-page.php">Search</a>
+            <a href = "results-page.php">Browse</a>
+            <a href = "about-us-page.html">About us</a>
+        </nav>
+    </header>
+        <div class = "gridContainer">
+            <div class = "gridItem"><h3 class = "centerText">Top 10 Genres</h3><?= topGenre() ?></div>
+            <div class = "gridItem"><h3 class = "centerText">Top 10 Artists</h3><?= topArtist() ?></div>
+            <div class = "gridItem"><h3 class = "centerText">Top 10 Songs</h3><?= mostPopularSongs() ?></div>
+            <div class = "gridItem"><h3 class = "centerText">Top 10 One Hits</h3><?= oneHitWonder() ?></div>
+            <div class = "gridItem"><h3 class = "centerText">Long Acoustic</h3><?= longestAcoustic() ?></div>
+            <div class = "gridItem"><h3 class = "centerText">Club Music</h3><?= atTheClub() ?></div>
+            <div class = "gridItem"><h3 class = "centerText">Exercise Music</h3><?= runningSongs() ?></div>
+            <div class = "gridItem"><h3 class = "centerText">Study Music</h3><?= studySongs() ?></div>
+        </div>
+    <footer>
+        <h4>Copyright &copy; 2023 Mandeep Bal</h4>
+        <p>Github Repository: <a href = "https://github.com/Mandeep099/WebAssignment1">Repository</a>
+        Github Contributors: <a href = "https://github.com/Mandeep099">Mandeep Bal</p>
+    </footer>
 </body>
 </html>

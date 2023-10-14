@@ -27,42 +27,57 @@ try {
 <link rel = "stylesheet" href = "css/style.css">
 <html>
 <body>
-    <div class = "container">
-        <?php
-            $titleInput = $_GET['hiddenInput'];
-            foreach($data as $row){
-                if(urldecode($titleInput) == $row['title']){
-                    //echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " other info: " . $row['type_name'] . "</br>";
-            ?>
-        <div class = "rectangle">Title</div>
-        <div class = "boxLeft">
-            <ul>
-                <li>Artist Name: <?= $row['title'] ?></li>
-                <li>Genre Name: <?= $row['genre_name'] ?></li>
-                <li>Artist Type: <?= $row['type_name'] ?></li>
-                <li>Song Release Year: <?= $row['year'] ?></li>
-            </ul>
-        </div>
-        <div class = "boxRight">
-            <ul>
-                <li>BPM: <?= $row['bpm'] ?></li>
-                <li>Energy: <progress value = <?= $row['energy'] ?> max = "100"></progress></li>
-                <li>Danceability: <progress value = <?= $row['danceability'] ?> max = "100"></progress></li>
-                <li>Liveness: <progress value = <?= $row['liveness'] ?> max = "100"></progress></li>
-                <li>Valence: <progress value = <?= $row['valence'] ?> max = "100"></progress></li>
-                <li>Acousticness: <progress value = <?= $row['acousticness'] ?> max = "100"></progress></li>
-                <li>Speechiness: <progress value = <?= $row['speechiness'] ?> max = "100"></progress></li>
-                <li>popularity: <progress value = <?= $row['popularity'] ?> max = "100"></progress></li>
-                <li>Duration: <?= round($row['duration']/60, 2)?></li>
-            </ul>
-        </div>
-        <?php
+    <header>
+        <h2>COMP 3512 Assign 1</h2>
+        <h3>Mandeep Bal</h3>
+        <nav>
+            <a href = "home-page.php">Home</a>
+            <a href = "search-page.php">Search</a>
+            <a href = "results-page.php">Browse</a>
+            <a href = "about-us-page.html">About us</a>
+        </nav>
+    </header>
+    <section>
+        <div class = "container">
+            <?php
+                $titleInput = $_GET['hiddenInput'];
+                foreach($data as $row){
+                    if(urldecode($titleInput) == $row['title']){
+                        //echo "Title: " . $row['title'] . " Name: " . $row['artist_name'] . " Genre: " . $row['genre_name'] . " other info: " . $row['type_name'] . "</br>";
+                ?>
+            <div class = "rectangle">Title: <?= $row['title'] ?></div>
+            <div class = "boxLeft">
+                <ul>
+                    <li class = "fontChange">Artist Name: <div id = "fontChange2"><?= $row['artist_name'] ?></div></li>
+                    <li class = "fontChange">Genre Name: <div id = "fontChange2"><?= $row['genre_name'] ?></div></li>
+                    <li class = "fontChange">Artist Type: <div id = "fontChange2"><?= $row['type_name'] ?></div></li>
+                    <li class = "fontChange">Song Release Year: <div id = "fontChange2"><?= $row['year'] ?></div></li>
+                </ul>
+            </div>
+            <div class = "boxRight">
+                <ul>
+                    <li class = "fontChange">BPM: <?= $row['bpm'] ?></li>
+                    <li class = "fontChange">Energy: <progress value = <?= $row['energy'] ?> max = "100"></progress></li>
+                    <li class = "fontChange">Danceability: <progress value = <?= $row['danceability'] ?> max = "100"></progress></li>
+                    <li class = "fontChange">Liveness: <progress value = <?= $row['liveness'] ?> max = "100"></progress></li>
+                    <li class = "fontChange">Valence: <progress value = <?= $row['valence'] ?> max = "100"></progress></li>
+                    <li class = "fontChange">Acousticness: <progress value = <?= $row['acousticness'] ?> max = "100"></progress></li>
+                    <li class = "fontChange">Speechiness: <progress value = <?= $row['speechiness'] ?> max = "100"></progress></li>
+                    <li class = "fontChange">popularity: <progress value = <?= $row['popularity'] ?> max = "100"></progress></li>
+                    <li class = "fontChange">Duration: <?= round($row['duration']/60, 2)?></li>
+                </ul>
+            </div>
+            <?php
+                    }
                 }
-            }
-        ?>
-
-
-    </div>
+            ?>
+        </div>
+    </section>
+    <footer>
+            <h4>Copyright &copy; 2023 Mandeep Bal</h4>
+            <p>Github Repository: <a href = "https://github.com/Mandeep099/WebAssignment1">Repository</a>
+            Github Contributors: <a href = "https://github.com/Mandeep099">Mandeep Bal</p>
+    </footer>
 </body>
 </html>
 
